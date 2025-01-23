@@ -1,3 +1,4 @@
+/* Configurações do corpo */
 body {
     margin: 0;
     padding: 0;
@@ -9,6 +10,7 @@ body {
     text-align: center;
 }
 
+/* Container geral */
 .container {
     display: flex;
     flex-direction: column;
@@ -18,20 +20,27 @@ body {
     background: rgba(0, 0, 0, 0.5);
 }
 
-.photo {
-    border-radius: 50%;
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border: 3px solid white;
+/* Carrossel */
+.carousel {
+    position: relative;
+    width: 300px; /* Largura do carrossel, ajuste conforme necessário */
+    height: 300px; /* Altura do carrossel, mesma da largura para um formato quadrado */
+    overflow: hidden; /* Esconde as imagens que ficam fora do contêiner */
     margin-bottom: 20px;
 }
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+.carousel-images {
+    display: flex; /* Coloca as imagens em linha */
+    transition: transform 1s ease-in-out; /* Transição suave ao deslizar */
 }
 
+.carousel img {
+    width: 100%; /* Faz a imagem ocupar toda a largura do carrossel */
+    height: 100%; /* Faz a imagem ocupar toda a altura do carrossel */
+    object-fit: cover; /* Garante que a imagem ocupe todo o espaço do carrossel sem distorcer */
+}
+
+/* Botões "Sim" e "Não" */
 .buttons {
     display: flex;
     gap: 20px;
@@ -43,11 +52,15 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
     transform: scale(1.1);
+}
+
+button:active {
+    transform: translateY(-5px);
 }
 
 #yes-button {
@@ -60,20 +73,28 @@ button:hover {
     color: white;
 }
 
-/* Estilos para a caixa de aviso personalizada */
+/* Caixa de alerta */
 .custom-alert {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    background: white;
-    color: black;
+    transform: translate(-50%, -50%) scale(0.8);
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    display: none; /* Inicialmente oculta */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s ease;
     z-index: 1000;
+}
+
+.custom-alert.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
 }
 
 .custom-alert button {

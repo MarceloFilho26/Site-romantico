@@ -5,24 +5,39 @@ document.addEventListener("DOMContentLoaded", function () {
     const alertMessage = document.getElementById('alert-message');
     const closeAlert = document.getElementById('close-alert');
 
-    // Exibir a mensagem personalizada
-    function showAlert(message) {
-        alertMessage.textContent = message; // Define a mensagem
-        alertBox.style.display = 'block'; // Mostra a caixinha de aviso
+    const carouselImages = document.querySelector('.carousel-images');
+    const totalImages = carouselImages.children.length;
+
+    let currentIndex = 0;
+
+    // Função para atualizar o carrossel automaticamente
+    function updateCarousel() {
+        const offset = -currentIndex * 300; // 300px é a largura da imagem
+        carouselImages.style.transform = `translateX(${offset}px)`;
+        currentIndex = (currentIndex + 1) % totalImages; // Loop infinito
     }
 
-    // Ocultar a mensagem personalizada
+    // Alterar imagem a cada 3 segundos
+    setInterval(updateCarousel, 3000);
+
+    // Exibir a mensagem personalizada
+    function showAlert(message) {
+        alertMessage.textContent = message;
+        alertBox.classList.add('show');
+    }
+
+    // Fechar o alerta
     closeAlert.addEventListener('click', function () {
-        alertBox.style.display = 'none'; // Oculta a caixinha de aviso
+        alertBox.classList.remove('show');
     });
 
     // Botão "Sim"
     yesButton.addEventListener('click', function () {
-        showAlert('Foi uma excelente escolha para a sua vida. Neném te ama e está com saudades❤️!');
+        showAlert('Foi uma excelente escolha para a sua vida! Neném te ama muito e esta com saudades❤️!');
     });
 
     // Botão "Não"
     noButton.addEventListener('click', function () {
-        showAlert('Não é possível recusar este pedido!');
+        showAlert('ERROR! Não é possível recusar este pedido!');
     });
 });
